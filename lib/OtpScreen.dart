@@ -78,7 +78,8 @@ class _OTPScreenState extends State<OTPScreen> {
   }
 
   void verifyOtp() async {
-    var code = '';
+    focusNodeForOTP.unfocus();
+    _isButtonDisabled = true;
 //    setState(() {
 //      isLoading = true;
 //    });
@@ -98,9 +99,6 @@ class _OTPScreenState extends State<OTPScreen> {
 //      isLoading = true;
 //    });
 
-    setState(() {
-      _isButtonDisabled = true;
-    });
     if (widget.mobileToken == "") {
       setState(() {
         isLoading = true;
@@ -138,7 +136,7 @@ class _OTPScreenState extends State<OTPScreen> {
               isLoading = false;
             });
             widget.verifyAndResendOtpCallback(otpToken);
-            return Toast.show(onValue['message'], context);
+            Toast.show(onValue['message'], context);
 
           }
         });
