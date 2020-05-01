@@ -4,21 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import 'APICalls/ServerCommunicator.dart';
 import 'CommonToastUI/ToastMessage.dart';
 import 'ResendOTPScreen.dart';
 
 class OTPScreen extends StatefulWidget {
   String mobileToken;
   String mobileNumber;
+  String loginurl;
+  String otpUrl;
+  Image applogo;
+  Function afterResendCallback;
+  Function verifyAndResendOtpCallback;
+
+  @override
+  _OTPScreenState createState() => _OTPScreenState();
 
   OTPScreen({
     Key key,
     @required this.mobileToken,
     @required this.mobileNumber,
+    @required this.applogo,
+    @required this.loginurl,
+    @required this.otpUrl,
+    @required this.afterResendCallback,
+    @required this.verifyAndResendOtpCallback,
   }) : super(key: key);
-
-  @override
-  _OTPScreenState createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
@@ -70,50 +81,102 @@ class _OTPScreenState extends State<OTPScreen> {
 
   void verifyOtp() async {
     var code = '';
+//    setState(() {
+//      isLoading = true;
+//    });
+//
+//    if (otpCode != null) {
+//      code = otpCode;
+//    }
+//
+//    if (code.isEmpty && code.length != 4) {
+//      setState(() {
+//        isLoading = false;
+//      });
+//      return Toast.show('Please enter otp', context);
+//    }
+//
+//    setState(() {
+//      isLoading = true;
+//    });
+
     setState(() {
-      isLoading = true;
+      _isButtonDisabled = true;
     });
-
-    if (otpCode != null) {
-      code = otpCode;
-    }
-
-    if (code.isEmpty && code.length != 4) {
+    if (widget.mobileToken == "") {
       setState(() {
-        isLoading = false;
+        isLoading = true;
       });
-      return Toast.show('Please enter otp', context);
-    }
+      APIProvider().doLogin(widget.mobileNumber,widget.loginurl).then((
+          onValue) {
+        if (onValue['flag']) {
+          setState(() {
+            isLoading = false;
+          });
+          setState(() {
+            otpToken = onValue['data'] as String;
+          });
+        } else {
+          setState(() {
+            isLoading = false;
+          });
+          Toast.show(onValue['message'] as String, context);
+        }
+      });
+    } else {
+      if (otpCode.length == 4) {
+        setState(() {
+          isLoading = true;
+        });
+        APIProvider().verifyOTP(otpToken as String,int.parse(otpCode),widget.otpUrl)
+            .then((onValue) {
+          if (onValue['flag']) {
+            setState(() {
+              isLoading = false;
+            });
 
-    setState(() {
-      isLoading = true;
-    });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+            widget.verifyAndResendOtpCallback(otpToken);
+            return Toast.show(onValue['message'], context);
+
+          }
+        });
+      } else {
+        Toast.show("Please enter valid OTP", context);
+      }
+    }
   }
 
   void tapOnReSendOtp() async {
-//    setState(() {
-//      isResend = true;
-//      _isButtonDisabled = true;
-//      setResendAfterTime();
-//    });
-//    var loginResponse = await CommonService.resendOtp(mobile: widget.mobileNumber, countryCode: '+91');
-//
-//    if(loginResponse.flag){
-//      setState(() {
-//        isResend = false;
-//        otpToken = loginResponse.data.mobileToken;
-//        Toast.show(
-//            loginResponse.message, context,
-//            duration: Toast.LENGTH_LONG);
-//      });
-//    }else{
-//      setState(() {
-//        isResend = false;
-//      });
-//      return Toast.show(
-//          loginResponse.message, context,
-//          duration: Toast.LENGTH_LONG);
-//    }
+    setState(() {
+      isResend = true;
+      _isButtonDisabled = true;
+      setResendAfterTime();
+    });
+    APIProvider().doLogin(widget.mobileNumber,widget.loginurl)
+        .then((onValue) {
+      if (onValue['flag']) {
+        setState(() {
+          isResend = false;
+          otpToken = onValue['data'] as String;
+        });
+
+        widget.afterResendCallback(onValue['data'] as String);
+
+      } else {
+        setState(() {
+          isResend = false;
+        });
+        return Toast.show(onValue['message'] as String, context);
+      }
+    });
+  }
+
+  removefocusfield(){
+    FocusScope.of(context).unfocus();
   }
 
   @override
@@ -128,10 +191,7 @@ class _OTPScreenState extends State<OTPScreen> {
               children: <Widget>[
                 SizedBox(
                   height: 120.0,
-                  child: Image.asset(
-                    "assets/img/app_icon.png",
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child: widget.applogo,
                 ),
                 SizedBox(
                   height: 25.0,
@@ -176,15 +236,15 @@ class _OTPScreenState extends State<OTPScreen> {
                             fontWeight: FontWeight.bold),
                         color: Color(0xFF1976d2)),
                     autofocus: false,
-//                    focusNode: isLoading || isResend ? removefocusfield() : focusNodeForOTP ,
+                    focusNode: isLoading || isResend ? removefocusfield() : focusNodeForOTP ,
                     currentCode: otpCode,
                     onCodeChanged: (code) {
-//                      print('OTP:-' + code);
-//                      if (code.length == 4) {
-//                        removefocusfield();
-//                        otpCode = code;
-//                        verifyOtp(loginViewModel);
-//                      }
+                      print('OTP:-' + code);
+                      if (code.length == 4) {
+                        removefocusfield();
+                        otpCode = code;
+                        verifyOtp();
+                      }
                     },
                   ),
                 ),

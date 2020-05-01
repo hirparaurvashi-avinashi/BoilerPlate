@@ -24,4 +24,13 @@ class APIProvider {
     return response.data;
   }
 
+  Future<Map<String, dynamic>> verifyOTP(String otpHash, int otp,String otpOrl) async {
+    Response response = await getDio().post(otpOrl, data: {
+      "otp": otp,
+      "mobileToken": otpHash,
+    });
+    return response.data;
+  }
+
+
 }

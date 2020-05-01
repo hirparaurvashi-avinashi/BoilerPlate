@@ -18,8 +18,9 @@ class LoginPage extends StatefulWidget{
 
   Image appLogo;
   String loginApiUrl;
+  String otpApiUrl;
   Function afterLoginCallback;
-
+  Function afterOtpCallback;
   LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl,@required this.afterLoginCallback}) : super(key: key);
 
   @override
@@ -55,7 +56,13 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  OTPScreen(mobileNumber: mobileController.text,mobileToken: onValue['data'] as String,),
+                  OTPScreen(mobileNumber: mobileController.text,mobileToken: onValue['data'] as String,
+                    afterResendCallback: widget.afterLoginCallback,
+                    applogo: widget.appLogo,
+                    loginurl: widget.loginApiUrl,
+                    otpUrl: widget.otpApiUrl,
+                    verifyAndResendOtpCallback: widget.afterOtpCallback,
+                  ),
             ),
           );
         } else {
