@@ -14,7 +14,7 @@ dependencies:
   dio:
   flutter_spinkit:
   json_annotation:
-  sms_autofill:
+#  sms_autofill:
 
 dev_dependencies:
   build_runner: ^1.0.0
