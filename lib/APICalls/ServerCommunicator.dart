@@ -17,11 +17,11 @@ class APIProvider {
     return dio;
   }
 
-  Future<LoginResponse> doLogin(String mobile,String loginApiUrl) async {
+  Future<Map<String, dynamic>> doLogin(String mobile,String loginApiUrl) async {
     Response response = await getDio().post(loginApiUrl,
         data: {"mobile": mobile});
-    final userResponse = LoginResponse.fromJson(response.data);
-    return userResponse;
+//    final userResponse = LoginResponse.fromJson(response.data);
+    return response.data;
   }
 
 }

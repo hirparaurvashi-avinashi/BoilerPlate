@@ -6,6 +6,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 import 'APICalls/ServerCommunicator.dart';
 import 'CommonToastUI/ToastMessage.dart';
+import 'OtpScreen.dart';
 
 /// A Calculator.
 class Calculator {
@@ -44,24 +45,24 @@ class _LoginPageState extends State<LoginPage> {
       });
       APIProvider().doLogin(mobileController.text,widget.loginApiUrl)
           .then((onValue) {
-        if (onValue.flag) {
+        if (onValue['flag']) {
           setState(() {
             isLoading = false;
           });
 
-          widget.afterLoginCallback(onValue.data.id);
-//          Navigator.pushReplacement(
-//            context,
-//            MaterialPageRoute(
-//              builder: (context) =>
-//                  OtpVerification(mobileNumber: mobileController.text,otpHashKey: onValue.data.id,),
-//            ),
-//          );
+          widget.afterLoginCallback(onValue['data'] as String);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  OTPScreen(mobileNumber: mobileController.text,mobileToken: onValue['data'] as String,),
+            ),
+          );
         } else {
           setState(() {
             isLoading = false;
           });
-          return Toast.show(onValue.message, context);
+          return Toast.show(onValue['message'] as String, context);
         }
       });
     }

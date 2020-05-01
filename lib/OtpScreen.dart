@@ -2,7 +2,7 @@ library boilerplate;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-//import 'package:sms_autofill/sms_autofill.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 import 'CommonToastUI/ToastMessage.dart';
 import 'ResendOTPScreen.dart';
@@ -42,7 +42,7 @@ class _OTPScreenState extends State<OTPScreen> {
     otpToken = widget.mobileToken;
     _isButtonDisabled = true;
     setResendAfterTime();
-//    autoDetectOTP();
+    autoDetectOTP();
     _start = 0;
   }
 
@@ -52,13 +52,13 @@ class _OTPScreenState extends State<OTPScreen> {
     super.dispose();
   }
 
-//  void autoDetectOTP() async {
-//    await SmsAutoFill().listenForCode;
-//    var signature = await SmsAutoFill().getAppSignature;
-//    print(signature);
-//    setState(() {
-//    });
-//  }
+  void autoDetectOTP() async {
+    await SmsAutoFill().listenForCode;
+    var signature = await SmsAutoFill().getAppSignature;
+    print(signature);
+    setState(() {
+    });
+  }
 
   void setResendAfterTime() {
     Future.delayed(const Duration(seconds: 30), () {
@@ -163,31 +163,31 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                 ),
 
-//                SizedBox(height: 20,),
-//                Container(
-//                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-//                  child:
-//                  PinFieldAutoFill(
-//                    codeLength: 4,
-//                    decoration: UnderlineDecoration(
-//                        textStyle: TextStyle(
-//                            color: Color(0xFF1976d2),
-//                            fontSize: 25,
-//                            fontWeight: FontWeight.bold),
-//                        color: Color(0xFF1976d2)),
-//                    autofocus: false,
-////                    focusNode: isLoading || isResend ? removefocusfield() : focusNodeForOTP ,
-//                    currentCode: otpCode,
-//                    onCodeChanged: (code) {
-////                      print('OTP:-' + code);
-////                      if (code.length == 4) {
-////                        removefocusfield();
-////                        otpCode = code;
-////                        verifyOtp(loginViewModel);
-////                      }
-//                    },
-//                  ),
-//                ),
+                SizedBox(height: 20,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child:
+                  PinFieldAutoFill(
+                    codeLength: 4,
+                    decoration: UnderlineDecoration(
+                        textStyle: TextStyle(
+                            color: Color(0xFF1976d2),
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                        color: Color(0xFF1976d2)),
+                    autofocus: false,
+//                    focusNode: isLoading || isResend ? removefocusfield() : focusNodeForOTP ,
+                    currentCode: otpCode,
+                    onCodeChanged: (code) {
+//                      print('OTP:-' + code);
+//                      if (code.length == 4) {
+//                        removefocusfield();
+//                        otpCode = code;
+//                        verifyOtp(loginViewModel);
+//                      }
+                    },
+                  ),
+                ),
                 SizedBox(
                   height: 15,
                 ),
