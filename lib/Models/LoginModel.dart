@@ -6,7 +6,7 @@ part 'LoginModel.g.dart';
 class LoginResponse {
   bool flag;
   String message;
-  UserToken data;
+  String data;
 
   LoginResponse(this.flag, this.message, this.data);
 
@@ -14,16 +14,4 @@ class LoginResponse {
       _$LoginResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
-}
-
-@JsonSerializable()
-class UserToken {
-  String id;
-
-  UserToken(this.id);
-
-  factory UserToken.fromJson(Map<String, dynamic> json) =>
-      _$UserTokenFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserTokenToJson(this);
 }
