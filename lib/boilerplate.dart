@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget{
   String loginApiUrl;
   String otpApiUrl;
   Function afterOtpCallback;
-  LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl}) : super(key: key);
+  LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl,@required this.afterOtpCallback,@required this.otpApiUrl}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
