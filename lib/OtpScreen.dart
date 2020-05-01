@@ -122,13 +122,12 @@ class _OTPScreenState extends State<OTPScreen> {
           isLoading = true;
         APIProvider().verifyOTP(otpToken as String,int.parse(otpCode),widget.otpUrl)
             .then((onValue) {
-          if (onValue['flag']) {
+          if (onValue['flag'] == true) {
               isLoading = false;
               widget.verifyAndResendOtpCallback(otpToken,onValue);
           } else {
               isLoading = false;
               Toast.show(onValue['message'], context);
-
           }
         });
       } else {
