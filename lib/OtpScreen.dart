@@ -14,7 +14,6 @@ class OTPScreen extends StatefulWidget {
   String loginurl;
   String otpUrl;
   Image applogo;
-  Function afterResendCallback;
   Function verifyAndResendOtpCallback;
 
   @override
@@ -27,7 +26,6 @@ class OTPScreen extends StatefulWidget {
     @required this.applogo,
     @required this.loginurl,
     @required this.otpUrl,
-    @required this.afterResendCallback,
     @required this.verifyAndResendOtpCallback,
   }) : super(key: key);
 }
@@ -163,9 +161,6 @@ class _OTPScreenState extends State<OTPScreen> {
           isResend = false;
           otpToken = onValue['data'] as String;
         });
-
-        widget.afterResendCallback(onValue['data'] as String);
-
       } else {
         setState(() {
           isResend = false;

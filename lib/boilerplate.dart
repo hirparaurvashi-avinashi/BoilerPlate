@@ -15,13 +15,11 @@ class Calculator {
 }
 
 class LoginPage extends StatefulWidget{
-
   Image appLogo;
   String loginApiUrl;
   String otpApiUrl;
-  Function afterLoginCallback;
   Function afterOtpCallback;
-  LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl,@required this.afterLoginCallback}) : super(key: key);
+  LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -51,13 +49,12 @@ class _LoginPageState extends State<LoginPage> {
             isLoading = false;
           });
 
-          widget.afterLoginCallback(onValue['data'] as String);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  OTPScreen(mobileNumber: mobileController.text,mobileToken: onValue['data'] as String,
-                    afterResendCallback: widget.afterLoginCallback,
+                  OTPScreen(mobileNumber: mobileController.text,
+                    mobileToken: onValue['data'] as String,
                     applogo: widget.appLogo,
                     loginurl: widget.loginApiUrl,
                     otpUrl: widget.otpApiUrl,
