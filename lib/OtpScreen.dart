@@ -127,15 +127,10 @@ class _OTPScreenState extends State<OTPScreen> {
         APIProvider().verifyOTP(otpToken as String,int.parse(otpCode),widget.otpUrl)
             .then((onValue) {
           if (onValue['flag']) {
-            setState(() {
               isLoading = false;
-            });
-
+              widget.verifyAndResendOtpCallback(otpToken,onValue);
           } else {
-            setState(() {
               isLoading = false;
-            });
-            widget.verifyAndResendOtpCallback(otpToken);
             Toast.show(onValue['message'], context);
 
           }
@@ -150,6 +145,7 @@ class _OTPScreenState extends State<OTPScreen> {
     setState(() {
       isResend = true;
       _isButtonDisabled = true;
+      otpCode = "";
       setResendAfterTime();
     });
     APIProvider().doLogin(widget.mobileNumber,widget.loginurl)

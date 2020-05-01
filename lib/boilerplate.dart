@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
             isLoading = false;
           });
 
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
