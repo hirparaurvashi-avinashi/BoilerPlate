@@ -80,11 +80,11 @@ class _LoginPageState extends State<LoginPage> {
                           child: widget.appIcon
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 30),
+                          margin: EdgeInsets.only(top: 20),
                           child: Text("Login",style: Theme.of(context).textTheme.headline,),
                         ),
                         Container(
-                            margin: EdgeInsets.only(left: 16, right: 16),
+                            margin: EdgeInsets.only(left: 16, right: 16,top: 30),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               controller: mobileController,
