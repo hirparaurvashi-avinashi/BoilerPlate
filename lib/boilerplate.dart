@@ -6,7 +6,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 import 'APICalls/ServerCommunicator.dart';
 import 'CommonToastUI/ToastMessage.dart';
-import 'OtpScreen.dart';
+import 'OTPModule/OtpScreen.dart';
 
 /// A Calculator.
 class Calculator {

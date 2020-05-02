@@ -1,12 +1,12 @@
 library boilerplate;
 
+import 'package:boilerplate/ResendOTPModule/ResendOTPScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-import 'APICalls/ServerCommunicator.dart';
-import 'CommonToastUI/ToastMessage.dart';
-import 'ResendOTPScreen.dart';
+import '../APICalls/ServerCommunicator.dart';
+import '../CommonToastUI/ToastMessage.dart';
 
 class OTPScreenPage extends StatefulWidget {
   String mobileToken;
