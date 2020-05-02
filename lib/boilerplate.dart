@@ -59,6 +59,73 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
+
+  Widget mobileNumberField(){
+    return Container(
+        margin: EdgeInsets.only(left: 16, right: 16,top: 30),
+        child: TextFormField(
+          keyboardType: TextInputType.number,
+          controller: mobileController,
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.stay_current_portrait, size: 18,),
+              focusedBorder:UnderlineInputBorder(
+                borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+              ),
+              labelText: "Enter mobile number",
+              focusColor: Colors.blue
+          ),
+          inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+          validator: (value) {
+            if (value.isEmpty) {
+              return "Mobile number can't be blank";
+            } else {
+              if (value.length < 10) {
+                return "Please enter valid mobile number";
+              }
+            }
+            return null;
+          },
+        )
+    );
+  }
+
+  Widget loginButtonUI(){
+    return Container(
+        margin: EdgeInsets.only(left: 16, right: 16, top: 30),
+        child: Container(
+          child: Material(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.blue,
+            child: InkWell(
+              // When the user taps the button, show a snackbar.
+              onTap: () {
+                onTapButton();
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
+                child:
+                isLoading
+                    ? SpinKitThreeBounce(
+                  color: Colors.white,
+                  size: 30.0,
+                )
+                    :
+                Text("Login",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+        )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,67 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                           margin: EdgeInsets.only(top: 20),
                           child: Text("Login",style: Theme.of(context).textTheme.headline,),
                         ),
-                        Container(
-                            margin: EdgeInsets.only(left: 16, right: 16,top: 30),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              controller: mobileController,
-                              decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.stay_current_portrait, size: 18,),
-                                  focusedBorder:UnderlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blue, width: 2.0),
-                                  ),
-                                  labelText: "Enter mobile number",
-                                  focusColor: Colors.blue
-                              ),
-                              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return "Mobile number can't be blank";
-                                } else {
-                                  if (value.length < 10) {
-                                    return "Please enter valid mobile number";
-                                  }
-                                }
-                                return null;
-                              },
-                            )
-                        ),
 
-                        Container(
-                            margin: EdgeInsets.only(left: 16, right: 16, top: 30),
-                            child: Container(
-                              child: Material(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.blue,
-                                child: InkWell(
-                                  // When the user taps the button, show a snackbar.
-                                  onTap: () {
-                                    onTapButton();
-                                  },
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
-                                    child:
-                                    isLoading
-                                        ? SpinKitThreeBounce(
-                                      color: Colors.white,
-                                      size: 30.0,
-                                    )
-                                        :
-                                    Text("Login",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                        ),
+                        mobileNumberField(),
+                        loginButtonUI()
                       ],
                     ))
               ]),

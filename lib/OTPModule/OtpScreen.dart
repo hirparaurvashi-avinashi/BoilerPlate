@@ -149,6 +149,67 @@ class _OTPScreenState extends State<OTPScreenPage> {
     FocusScope.of(context).unfocus();
   }
 
+  Widget otpField(){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 25.0),
+      child:
+      PinFieldAutoFill(
+        codeLength: 4,
+        decoration: UnderlineDecoration(
+            textStyle: TextStyle(
+                color: Color(0xFF1976d2),
+                fontSize: 25,
+                fontWeight: FontWeight.bold),
+            color: Color(0xFF1976d2)),
+        autofocus: false,
+        focusNode: isLoading || isResend ? removefocusfield() : focusNodeForOTP ,
+        currentCode: otpCode,
+        onCodeChanged: (code) {
+          print('OTP:-' + code);
+          if (code.length == 4) {
+            removefocusfield();
+            otpCode = code;
+            verifyOtp();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget verifiOTPButton(){
+    return Container(
+      child: Material(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.blue,
+        child: InkWell(
+          // When the user taps the button, show a snackbar.
+          onTap: () {
+            if(!isLoading){
+//                          tapOnButton();
+            }
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
+            child: isLoading
+                ? SpinKitThreeBounce(
+              color: Colors.white,
+              size: 30.0,
+            )
+                : Text("VerifyOTP",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,64 +255,11 @@ class _OTPScreenState extends State<OTPScreenPage> {
                 ),
 
                 SizedBox(height: 20,),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child:
-                  PinFieldAutoFill(
-                    codeLength: 4,
-                    decoration: UnderlineDecoration(
-                        textStyle: TextStyle(
-                            color: Color(0xFF1976d2),
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold),
-                        color: Color(0xFF1976d2)),
-                    autofocus: false,
-                    focusNode: isLoading || isResend ? removefocusfield() : focusNodeForOTP ,
-                    currentCode: otpCode,
-                    onCodeChanged: (code) {
-                      print('OTP:-' + code);
-                      if (code.length == 4) {
-                        removefocusfield();
-                        otpCode = code;
-                        verifyOtp();
-                      }
-                    },
-                  ),
-                ),
+                otpField(),
                 SizedBox(
                   height: 15,
                 ),
-                Container(
-                  child: Material(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.blue,
-                    child: InkWell(
-                      // When the user taps the button, show a snackbar.
-                      onTap: () {
-                        if(!isLoading){
-//                          tapOnButton();
-                        }
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
-                        child: isLoading
-                            ? SpinKitThreeBounce(
-                          color: Colors.white,
-                          size: 30.0,
-                        )
-                            : Text("VerifyOTP",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                verifiOTPButton(),
                 SizedBox(
                   height: 20,
                 ),
