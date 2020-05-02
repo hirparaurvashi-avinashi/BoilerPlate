@@ -26,6 +26,10 @@ class DesignCourseAppTheme {
   static const Color chipBackground = Color(0xFFEEF1F3);
   static const Color spacer = Color(0xFFF2F2F2);
 
+  static const String fontFamily = "WorkSans";
+  static const FontWeight fontWeightbold = FontWeight.bold;
+  static const FontWeight fontWeightLightBold = FontWeight.bold;
+
   static TextTheme textTheme = TextTheme(
     display1: display1,
     display2: display2,
@@ -37,66 +41,64 @@ class DesignCourseAppTheme {
   );
 
   static TextStyle display1 = TextStyle( // h4 -> display1
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontWeight: fontWeightbold,
     fontSize: 36,
     color: darkerText,
   );
 
   static TextStyle display2 = TextStyle( // h4 -> display1
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
     fontSize: 18,
     height: 1.0,
     color: appThemeColor,
   );
 
   static TextStyle styleWithTextTheme = TextStyle( // h4 -> display1
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.w400,
+    fontFamily: fontFamily,
+    fontWeight: fontWeightLightBold,
     fontSize: 15,
     color: appThemeColor,
   );
 
   static TextStyle headline = TextStyle( // h5 -> headline
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontWeight: fontWeightbold,
     fontSize: 24,
     color: appThemeColor,
   );
 
   static TextStyle title = TextStyle( // h6 -> title
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
     fontSize: 18,
     height: 1.0,
     color: darkerText,
   );
 
   static const TextStyle subtitle = TextStyle( // subtitle2 -> subtitle
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.w400,
+    fontFamily: fontFamily,
+    fontWeight: fontWeightLightBold,
     fontSize: 14,
     color: darkText,
   );
 
   static const TextStyle body1 = TextStyle( // body2 -> body1
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.w400,
+    fontFamily: fontFamily,
+    fontWeight: fontWeightLightBold,
     fontSize: 16,
     color: darkText,
   );
 
   static const TextStyle caption = TextStyle( // Caption -> caption
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.w400,
+    fontFamily: fontFamily,
+    fontWeight: fontWeightLightBold,
     fontSize: 12,
     color: lightText, // was lightText
   );
 
   static const TextStyle tansprentFontColor = TextStyle( // h5 -> headline
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontWeight: fontWeightbold,
     fontSize: 16,
     color: Colors.white,
   );
