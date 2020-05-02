@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:boilerplate/Theme/AppTheme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -64,13 +65,7 @@ class ResendTimerScreenState extends State<ResendTimerScreen> {
                 return Text.rich(
                   TextSpan(
                     text: "If you don't receive a code!",
-                    style: TextStyle(
-                      height: 1.0,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "SourceSansPro",
-                      color: Colors.grey[700],
-                    ),
+                    style: DesignCourseAppTheme.title,
                     children: <TextSpan>[
                       TextSpan(
                         text: _start == 0
@@ -88,15 +83,7 @@ class ResendTimerScreenState extends State<ResendTimerScreen> {
                             startTimer();
                             widget.callback();
                           },
-                        style: TextStyle(
-                          height: 1.0,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "SourceSansPro",
-                          color: widget.isButtonDisable
-                              ? Colors.grey[700]
-                              : Color.fromRGBO(72, 131, 155, 1.0),
-                        ),
+                        style: widget.isButtonDisable ? DesignCourseAppTheme.title : DesignCourseAppTheme.appThemeColor
                       ),
                     ],
                   ),

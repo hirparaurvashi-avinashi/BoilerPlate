@@ -28,6 +28,7 @@ class DesignCourseAppTheme {
 
   static TextTheme textTheme = TextTheme(
     display1: display1,
+    display2: display2,
     headline: headline,
     title: title,
     subtitle: subtitle,
@@ -40,6 +41,14 @@ class DesignCourseAppTheme {
     fontWeight: FontWeight.bold,
     fontSize: 36,
     color: darkerText,
+  );
+
+  static TextStyle display2 = TextStyle( // h4 -> display1
+    fontFamily: 'WorkSans',
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+    height: 1.0,
+    color: appThemeColor,
   );
 
   static TextStyle styleWithTextTheme = TextStyle( // h4 -> display1
@@ -60,6 +69,7 @@ class DesignCourseAppTheme {
     fontFamily: 'WorkSans',
     fontWeight: FontWeight.bold,
     fontSize: 18,
+    height: 1.0,
     color: darkerText,
   );
 
