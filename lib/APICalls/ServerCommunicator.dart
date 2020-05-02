@@ -1,3 +1,4 @@
+import 'package:boilerplate/Constants/Config.dart';
 import 'package:dio/dio.dart';
 import 'dart:io';
 
@@ -19,22 +20,22 @@ class APIProvider {
     return dio;
   }
 
-  Future<Map<String, dynamic>> doLogin(String mobile,String loginApiUrl) async {
-    Response response = await getDio().post(loginApiUrl,
+  Future<Map<String, dynamic>> doLogin(String mobile) async {
+    Response response = await getDio().post(Config.loginUrl,
         data: {"mobile": mobile});
 //    final userResponse = LoginResponse.fromJson(response.data);
     return response.data;
   }
 
-  Future<Map<String, dynamic>> verifyOTP(String otpHash, int otp,String otpOrl) async {
-    Response response = await getDio().post(otpOrl, data: {
+  Future<Map<String, dynamic>> verifyOTP(String otpHash, int otp) async {
+    Response response = await getDio().post(Config.otpUrl, data: {
       "otp": otp,
       "mobileToken": otpHash,
     });
     return response.data;
   }
 
-  Future<Map<String, dynamic>> checkAppVersions(String checkAppVersionUrl) async {
+  Future<Map<String, dynamic>> checkAppVersions() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String appName = packageInfo.appName;
     String packageName = packageInfo.packageName;
@@ -49,7 +50,7 @@ class APIProvider {
           (buildNumber.length == 1 ? ("0" + buildNumber) : buildNumber);
     }
 
-    Response response = await getDio().get(checkAppVersionUrl,
+    Response response = await getDio().get(Config.appVersion,
         options: Options(
           headers: {
             'appVersion': buildString,

@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isLoading = true;
       });
-      APIProvider().doLogin(mobileController.text,Config.loginUrl)
+      APIProvider().doLogin(mobileController.text)
           .then((onValue) {
         if (onValue['flag']) {
           setState(() {
@@ -67,11 +67,12 @@ class _LoginPageState extends State<LoginPage> {
           keyboardType: TextInputType.number,
           controller: mobileController,
           decoration: InputDecoration(
-              prefixIcon: Icon(Icons.stay_current_portrait, size: 18,),
+              prefixIcon: Icon(Icons.stay_current_portrait, size: 18,color: DesignCourseAppTheme.appThemeColor,),
               focusedBorder:UnderlineInputBorder(
                 borderSide: BorderSide(color: DesignCourseAppTheme.appThemeColor, width: 2.0),
               ),
               labelText: "Enter mobile number",
+              labelStyle: DesignCourseAppTheme.styleWithTextTheme,
               focusColor: DesignCourseAppTheme.appThemeColor
           ),
           inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],

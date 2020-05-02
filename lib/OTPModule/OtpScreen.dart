@@ -80,7 +80,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       setState(() {
         isLoading = true;
       });
-      APIProvider().doLogin(widget.mobileNumber,Config.loginUrl).then((
+      APIProvider().doLogin(widget.mobileNumber).then((
           onValue) {
         if (onValue['flag']) {
           setState(() {
@@ -101,7 +101,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
         setState(() {
           isLoading = true;
         });
-        APIProvider().verifyOTP(otpToken as String,int.parse(otpCode),Config.otpUrl)
+        APIProvider().verifyOTP(otpToken as String,int.parse(otpCode))
             .then((onValue) {
           if (onValue['flag']) {
               isLoading = false;
@@ -127,7 +127,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       otpCode = "";
       setResendAfterTime();
     });
-    APIProvider().doLogin(widget.mobileNumber,Config.loginUrl)
+    APIProvider().doLogin(widget.mobileNumber)
         .then((onValue) {
       if (onValue['flag']) {
         setState(() {
