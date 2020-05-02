@@ -1,4 +1,5 @@
 library boilerplate;
+import 'package:boilerplate/Theme/AppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -6,6 +7,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 import 'APICalls/ServerCommunicator.dart';
 import 'CommonToastUI/ToastMessage.dart';
+import 'Constants/Config.dart';
 import 'OTPModule/OtpScreen.dart';
 
 /// A Calculator.
@@ -16,10 +18,8 @@ class Calculator {
 
 class LoginPage extends StatefulWidget{
   Image appIcon;
-  String loginApiUrl;
-  String otpApiUrl;
   Function afterLoginCallback;
-  LoginPage({Key key, @required this.appIcon,@required this.loginApiUrl,@required this.afterLoginCallback,@required this.otpApiUrl}) : super(key: key);
+  LoginPage({Key key, @required this.appIcon,@required this.afterLoginCallback}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isLoading = true;
       });
-      APIProvider().doLogin(mobileController.text,widget.loginApiUrl)
+      APIProvider().doLogin(mobileController.text,Config.loginUrl)
           .then((onValue) {
         if (onValue['flag']) {
           setState(() {
@@ -69,10 +69,10 @@ class _LoginPageState extends State<LoginPage> {
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.stay_current_portrait, size: 18,),
               focusedBorder:UnderlineInputBorder(
-                borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                borderSide: BorderSide(color: DesignCourseAppTheme.appThemeColor, width: 2.0),
               ),
               labelText: "Enter mobile number",
-              focusColor: Colors.blue
+              focusColor: DesignCourseAppTheme.appThemeColor
           ),
           inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
           validator: (value) {
@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Container(
           child: Material(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.blue,
+            color: DesignCourseAppTheme.appThemeColor,
             child: InkWell(
               // When the user taps the button, show a snackbar.
               onTap: () {
@@ -107,16 +107,12 @@ class _LoginPageState extends State<LoginPage> {
                 child:
                 isLoading
                     ? SpinKitThreeBounce(
-                  color: Colors.white,
+                  color: DesignCourseAppTheme.white,
                   size: 30.0,
                 )
                     :
                 Text("Login",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400
-                  ),
+                  style: DesignCourseAppTheme.tansprentFontColor,
                   textAlign: TextAlign.center,
                 ),
               ),

@@ -1,4 +1,6 @@
+import 'package:boilerplate/Constants/Config.dart';
 import 'package:boilerplate/ResendOTPModule/ResendOTPScreen.dart';
+import 'package:boilerplate/Theme/AppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sms_autofill/sms_autofill.dart';
@@ -9,8 +11,6 @@ import '../CommonToastUI/ToastMessage.dart';
 class OTPScreenPage extends StatefulWidget {
   String mobileToken;
   String mobileNumber;
-  String loginurl;
-  String otpUrl;
   Image appIcon;
   Function verifyOtpCallback;
 
@@ -22,8 +22,6 @@ class OTPScreenPage extends StatefulWidget {
     @required this.mobileToken,
     @required this.mobileNumber,
     @required this.appIcon,
-    @required this.loginurl,
-    @required this.otpUrl,
     @required this.verifyOtpCallback,
   }) : super(key: key);
 }
@@ -82,7 +80,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       setState(() {
         isLoading = true;
       });
-      APIProvider().doLogin(widget.mobileNumber,widget.loginurl).then((
+      APIProvider().doLogin(widget.mobileNumber,Config.loginUrl).then((
           onValue) {
         if (onValue['flag']) {
           setState(() {
@@ -103,7 +101,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
         setState(() {
           isLoading = true;
         });
-        APIProvider().verifyOTP(otpToken as String,int.parse(otpCode),widget.otpUrl)
+        APIProvider().verifyOTP(otpToken as String,int.parse(otpCode),Config.otpUrl)
             .then((onValue) {
           if (onValue['flag']) {
               isLoading = false;
@@ -129,7 +127,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       otpCode = "";
       setResendAfterTime();
     });
-    APIProvider().doLogin(widget.mobileNumber,widget.loginurl)
+    APIProvider().doLogin(widget.mobileNumber,Config.loginUrl)
         .then((onValue) {
       if (onValue['flag']) {
         setState(() {
@@ -156,11 +154,8 @@ class _OTPScreenState extends State<OTPScreenPage> {
       PinFieldAutoFill(
         codeLength: 4,
         decoration: UnderlineDecoration(
-            textStyle: TextStyle(
-                color: Color(0xFF1976d2),
-                fontSize: 25,
-                fontWeight: FontWeight.bold),
-            color: Color(0xFF1976d2)),
+            textStyle: DesignCourseAppTheme.headline,
+            color: DesignCourseAppTheme.appThemeColor),
         autofocus: false,
         focusNode: isLoading || isResend ? removefocusfield() : focusNodeForOTP ,
         currentCode: otpCode,
@@ -180,7 +175,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
     return Container(
       child: Material(
         borderRadius: BorderRadius.circular(5),
-        color: Colors.blue,
+        color: DesignCourseAppTheme.appThemeColor,
         child: InkWell(
           // When the user taps the button, show a snackbar.
           onTap: () {
@@ -193,15 +188,11 @@ class _OTPScreenState extends State<OTPScreenPage> {
             padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
             child: isLoading
                 ? SpinKitThreeBounce(
-              color: Colors.white,
+              color: DesignCourseAppTheme.white,
               size: 30.0,
             )
                 : Text("VerifyOTP",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400
-              ),
+              style: DesignCourseAppTheme.tansprentFontColor,
               textAlign: TextAlign.center,
             ),
           ),
@@ -209,7 +200,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       ),
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -220,10 +211,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  height: 120.0,
-                  child: widget.appIcon,
-                ),
+                widget.appIcon,
                 SizedBox(
                   height: 25.0,
                 ),
@@ -233,21 +221,11 @@ class _OTPScreenState extends State<OTPScreenPage> {
                   child: Text.rich(
                     TextSpan(
                       text: 'OTP has been sent to Mobile No. ',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontFamily: "SourceSansPro",
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey[700],
-                      ),
+                      style: DesignCourseAppTheme.body1,
                       children: <TextSpan>[
                         TextSpan(
                           text: widget.mobileNumber,
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontFamily: "SourceSansPro",
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromRGBO(72, 131, 155, 1.0),
-                          ),
+                          style: DesignCourseAppTheme.styleWithTextTheme,
                         ),
                       ],
                     ),
@@ -257,7 +235,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
                 SizedBox(height: 20,),
                 otpField(),
                 SizedBox(
-                  height: 15,
+                  height: 30,
                 ),
                 verifiOTPButton(),
                 SizedBox(
