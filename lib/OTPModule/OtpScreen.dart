@@ -128,8 +128,10 @@ class _OTPScreenState extends State<OTPScreenPage> {
               isLoading = false;
               widget.verifyAndResendOtpCallback(otpToken,onValue);
           } else {
-            otpCode = "";
+            setState(() {
               isLoading = false;
+              otpCode = "";
+            });
             Toast.show(onValue['message'], context);
           }
         });
