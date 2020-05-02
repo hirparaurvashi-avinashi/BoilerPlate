@@ -8,7 +8,7 @@ import 'APICalls/ServerCommunicator.dart';
 import 'CommonToastUI/ToastMessage.dart';
 import 'ResendOTPScreen.dart';
 
-class OTPScreen extends StatefulWidget {
+class OTPScreenPage extends StatefulWidget {
   String mobileToken;
   String mobileNumber;
   String loginurl;
@@ -19,7 +19,7 @@ class OTPScreen extends StatefulWidget {
   @override
   _OTPScreenState createState() => _OTPScreenState();
 
-  OTPScreen({
+  OTPScreenPage({
     Key key,
     @required this.mobileToken,
     @required this.mobileNumber,
@@ -30,7 +30,7 @@ class OTPScreen extends StatefulWidget {
   }) : super(key: key);
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _OTPScreenState extends State<OTPScreenPage> {
   TextEditingController otpController = TextEditingController();
 
   var focusNodeForOTP = new FocusNode();
@@ -128,21 +128,11 @@ class _OTPScreenState extends State<OTPScreen> {
             .then((onValue) {
           if (onValue['flag']) {
               isLoading = false;
-              WidgetsBinding.instance.addPostFrameCallback((_){
-                widget.verifyAndResendOtpCallback(otpToken,onValue);
-              });
+              widget.verifyAndResendOtpCallback(otpToken,onValue);
           } else {
             otpCode = "";
-//            setState(() {
-//
-//            });
               isLoading = false;
-            WidgetsBinding.instance.addPostFrameCallback((_){
-              widget.verifyAndResendOtpCallback(otpToken,onValue);
-            });
-
             Toast.show(onValue['message'], context);
-
           }
         });
       } else {

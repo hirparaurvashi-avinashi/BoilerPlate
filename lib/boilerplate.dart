@@ -18,8 +18,8 @@ class LoginPage extends StatefulWidget{
   Image appLogo;
   String loginApiUrl;
   String otpApiUrl;
-  Function afterOtpCallback;
-  LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl,@required this.afterOtpCallback,@required this.otpApiUrl}) : super(key: key);
+  Function afterLoginCallback;
+  LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl,@required this.afterLoginCallback,@required this.otpApiUrl}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -49,19 +49,20 @@ class _LoginPageState extends State<LoginPage> {
             isLoading = false;
           });
 
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  OTPScreen(mobileNumber: mobileController.text,
-                    mobileToken: onValue['data'] as String,
-                    applogo: widget.appLogo,
-                    loginurl: widget.loginApiUrl,
-                    otpUrl: widget.otpApiUrl,
-                    verifyAndResendOtpCallback: widget.afterOtpCallback,
-                  ),
-            ),
-          );
+          widget.afterLoginCallback(onValue["data"] as String,mobileController.text);
+//          Navigator.pushReplacement(
+//            context,
+//            MaterialPageRoute(
+//              builder: (context) =>
+//                  OTPScreen(mobileNumber: mobileController.text,
+//                    mobileToken: onValue['data'] as String,
+//                    applogo: widget.appLogo,
+//                    loginurl: widget.loginApiUrl,
+//                    otpUrl: widget.otpApiUrl,
+//                    verifyAndResendOtpCallback: widget.afterOtpCallback,
+//                  ),
+//            ),
+//          );
         } else {
           setState(() {
             isLoading = false;
