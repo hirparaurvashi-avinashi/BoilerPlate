@@ -15,6 +15,9 @@ dependencies:
   flutter_spinkit:
   json_annotation:
   sms_autofill:
+  package_info:
+  device_info:
+  store_redirect:
 
 dev_dependencies:
   build_runner: ^1.0.0

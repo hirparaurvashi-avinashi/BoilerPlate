@@ -65,6 +65,8 @@ class _OTPScreenState extends State<OTPScreen> {
     await SmsAutoFill().listenForCode;
     var signature = await SmsAutoFill().getAppSignature;
     print(signature);
+    setState(() {
+    });
   }
 
   void setResendAfterTime() {
@@ -119,15 +121,19 @@ class _OTPScreenState extends State<OTPScreen> {
       });
     } else {
       if (otpCode.length == 4) {
+        setState(() {
           isLoading = true;
+        });
         APIProvider().verifyOTP(otpToken as String,int.parse(otpCode),widget.otpUrl)
             .then((onValue) {
-          if (onValue['flag'] == true) {
+          if (onValue['flag']) {
               isLoading = false;
               widget.verifyAndResendOtpCallback(otpToken,onValue);
           } else {
+            otpCode = "";
               isLoading = false;
-              Toast.show(onValue['message'], context);
+            Toast.show(onValue['message'], context);
+
           }
         });
       } else {

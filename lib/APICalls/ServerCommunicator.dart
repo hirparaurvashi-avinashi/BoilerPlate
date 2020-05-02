@@ -1,5 +1,7 @@
-import 'package:boilerplate/Models/LoginModel.dart';
 import 'package:dio/dio.dart';
+import 'dart:io';
+
+import 'package:package_info/package_info.dart';
 
 class APIProvider {
   Dio getDio() {
@@ -32,5 +34,29 @@ class APIProvider {
     return response.data;
   }
 
+  Future<Map<String, dynamic>> checkAppVersions(String checkAppVersionUrl) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    var buildString = '';
+    if (Platform.isAndroid) {
+      buildString = buildNumber.toString();
+    } else {
+      buildString = version.replaceAll('.', '') +
+          (buildNumber.length == 1 ? ("0" + buildNumber) : buildNumber);
+    }
+
+    Response response = await getDio().get(checkAppVersionUrl,
+        options: Options(
+          headers: {
+            'appVersion': buildString,
+            'deviceType': Platform.isAndroid ? 1 : 2 // 1 = android , 2 = iOS
+          },
+        ));
+    return response.data;
+  }
 
 }
