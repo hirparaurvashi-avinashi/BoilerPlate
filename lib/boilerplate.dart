@@ -15,11 +15,11 @@ class Calculator {
 }
 
 class LoginPage extends StatefulWidget{
-  Image appLogo;
+  Image appIcon;
   String loginApiUrl;
   String otpApiUrl;
   Function afterLoginCallback;
-  LoginPage({Key key, @required this.appLogo,@required this.loginApiUrl,@required this.afterLoginCallback,@required this.otpApiUrl}) : super(key: key);
+  LoginPage({Key key, @required this.appIcon,@required this.loginApiUrl,@required this.afterLoginCallback,@required this.otpApiUrl}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -50,19 +50,6 @@ class _LoginPageState extends State<LoginPage> {
           });
 
           widget.afterLoginCallback(onValue["data"] as String,mobileController.text);
-//          Navigator.pushReplacement(
-//            context,
-//            MaterialPageRoute(
-//              builder: (context) =>
-//                  OTPScreen(mobileNumber: mobileController.text,
-//                    mobileToken: onValue['data'] as String,
-//                    applogo: widget.appLogo,
-//                    loginurl: widget.loginApiUrl,
-//                    otpUrl: widget.otpApiUrl,
-//                    verifyAndResendOtpCallback: widget.afterOtpCallback,
-//                  ),
-//            ),
-//          );
         } else {
           setState(() {
             isLoading = false;
@@ -85,18 +72,16 @@ class _LoginPageState extends State<LoginPage> {
                 ResponsiveGridCol(
                     xs: 12,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.only(top: 50, bottom: 50),
-                          child: widget.appLogo
+                          child: widget.appIcon
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 50),
-                          child: Text("Login with mobile",style: Theme.of(context).textTheme.headline,),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 20, bottom: 50),
-                          child: Text("Enter your mobile number to get \nverification code",style: Theme.of(context).textTheme.subhead, textAlign: TextAlign.center,),
+                          margin: EdgeInsets.only(top: 30),
+                          child: Text("Login",style: Theme.of(context).textTheme.headline,),
                         ),
                         Container(
                             margin: EdgeInsets.only(left: 16, right: 16),

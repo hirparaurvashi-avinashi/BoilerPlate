@@ -11,8 +11,8 @@ class OTPScreenPage extends StatefulWidget {
   String mobileNumber;
   String loginurl;
   String otpUrl;
-  Image applogo;
-  Function verifyAndResendOtpCallback;
+  Image appIcon;
+  Function verifyOtpCallback;
 
   @override
   _OTPScreenState createState() => _OTPScreenState();
@@ -21,10 +21,10 @@ class OTPScreenPage extends StatefulWidget {
     Key key,
     @required this.mobileToken,
     @required this.mobileNumber,
-    @required this.applogo,
+    @required this.appIcon,
     @required this.loginurl,
     @required this.otpUrl,
-    @required this.verifyAndResendOtpCallback,
+    @required this.verifyOtpCallback,
   }) : super(key: key);
 }
 
@@ -78,25 +78,6 @@ class _OTPScreenState extends State<OTPScreenPage> {
   void verifyOtp() async {
     focusNodeForOTP.unfocus();
     _isButtonDisabled = true;
-//    setState(() {
-//      isLoading = true;
-//    });
-//
-//    if (otpCode != null) {
-//      code = otpCode;
-//    }
-//
-//    if (code.isEmpty && code.length != 4) {
-//      setState(() {
-//        isLoading = false;
-//      });
-//      return Toast.show('Please enter otp', context);
-//    }
-//
-//    setState(() {
-//      isLoading = true;
-//    });
-
     if (widget.mobileToken == "") {
       setState(() {
         isLoading = true;
@@ -126,7 +107,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
             .then((onValue) {
           if (onValue['flag']) {
               isLoading = false;
-              widget.verifyAndResendOtpCallback(otpToken,onValue);
+              widget.verifyOtpCallback(otpToken,onValue);
           } else {
             setState(() {
               isLoading = false;
@@ -180,7 +161,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
               children: <Widget>[
                 SizedBox(
                   height: 120.0,
-                  child: widget.applogo,
+                  child: widget.appIcon,
                 ),
                 SizedBox(
                   height: 25.0,
@@ -236,9 +217,6 @@ class _OTPScreenState extends State<OTPScreenPage> {
                       }
                     },
                   ),
-                ),
-                SizedBox(
-                  height: 15,
                 ),
                 SizedBox(
                   height: 15,
