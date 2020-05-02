@@ -133,10 +133,14 @@ class _OTPScreenState extends State<OTPScreen> {
               });
           } else {
             otpCode = "";
-            setState(() {
-              
-            });
+//            setState(() {
+//
+//            });
               isLoading = false;
+            WidgetsBinding.instance.addPostFrameCallback((_){
+              widget.verifyAndResendOtpCallback(otpToken,onValue);
+            });
+
             Toast.show(onValue['message'], context);
 
           }
