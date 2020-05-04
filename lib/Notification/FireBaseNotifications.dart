@@ -59,7 +59,7 @@ class FireBaseNotificationEvents {
     print(payload);
   }
 
-  Future onTapNotification(Map<String, dynamic> payload) async {
+  static Future onTapNotification(Map<String, dynamic> payload) async {
     tapOnNotification(payload);
   }
 
@@ -68,7 +68,7 @@ class FireBaseNotificationEvents {
       final message = json.decode(payload);
       var jsonData = new Map<String, dynamic>.from(message);
       onSelectLocalNotification(jsonData);
-      tapOnNotification(jsonData);
+      onTapNotification(jsonData);
     }
   }
 
