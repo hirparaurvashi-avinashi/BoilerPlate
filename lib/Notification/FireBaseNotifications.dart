@@ -9,12 +9,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
 class FireBaseNotificationEvents {
-  Function tapOnNotification;
-  Function onSelectLocalNotification;
-  Function getTokenEvent;
-  Function getOnMessageEvent;
-  Function getOnResumeMessageEvent;
-  Function getOnLaunchMessageEvent;
+  static Function tapOnNotification;
+  static Function onSelectLocalNotification;
+  static Function getTokenEvent;
+  static Function getOnMessageEvent;
+  static Function getOnResumeMessageEvent;
+  static Function getOnLaunchMessageEvent;
 
   FireBaseNotificationEvents(Function tapOnNotifications,Function onSelectionOfLocalNotification,Function getTokenEvents,
       Function getMesageEvent,
@@ -29,10 +29,10 @@ class FireBaseNotificationEvents {
     getOnLaunchMessageEvent = getOnLaunchMessageEvents;
   }
 
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  static FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   static FlutterLocalNotificationsPlugin notifications;
 
-  void iOSPermission() {
+  static void iOSPermission() {
     _firebaseMessaging.requestNotificationPermissions(
         IosNotificationSettings(sound: true, badge: true, alert: true));
     _firebaseMessaging.onIosSettingsRegistered
@@ -41,7 +41,7 @@ class FireBaseNotificationEvents {
     });
   }
 
-  void intializeLocalNotification() {
+  static void intializeLocalNotification() {
     var initSettingsAndroid =
     new AndroidInitializationSettings('@mipmap/ic_launcher');
     var initSettingsIos = new IOSInitializationSettings(
@@ -54,7 +54,7 @@ class FireBaseNotificationEvents {
   }
 
   // ignore: missing_return
-  Future onDidReceiveLocalNotification(int id, String title, String body,
+  static Future onDidReceiveLocalNotification(int id, String title, String body,
       String payload) {
     print(payload);
   }
@@ -63,7 +63,7 @@ class FireBaseNotificationEvents {
     tapOnNotification(payload);
   }
 
-  Future onSelectNotification(String payload) async {
+  static Future onSelectNotification(String payload) async {
     if (payload != null) {
       final message = json.decode(payload);
       var jsonData = new Map<String, dynamic>.from(message);
@@ -117,7 +117,7 @@ class FireBaseNotificationEvents {
   }
 
 
-  void fireBaseCloudMessagingListeners() {
+  static void fireBaseCloudMessagingListeners() {
     if (Platform.isIOS) iOSPermission();
 
     _firebaseMessaging.getToken().then((token) {
