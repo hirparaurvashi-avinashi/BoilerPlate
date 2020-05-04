@@ -10,7 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  responsive_grid: ^1.1.1
+  firebase_messaging:
+  flutter_local_notifications: ^1.2.1
+  responsive_grid:
+  path_provider:
+  http:
   dio:
   flutter_spinkit:
   json_annotation:
