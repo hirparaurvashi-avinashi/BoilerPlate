@@ -30,7 +30,7 @@ class FireBaseNotificationEvents {
   }
 
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  FlutterLocalNotificationsPlugin notifications;
+  static FlutterLocalNotificationsPlugin notifications;
 
   void iOSPermission() {
     _firebaseMessaging.requestNotificationPermissions(
@@ -72,7 +72,7 @@ class FireBaseNotificationEvents {
     }
   }
 
-  Future<String> _downloadAndSaveImage(String url, String fileName) async {
+  static Future<String> _downloadAndSaveImage(String url, String fileName) async {
     var directory = await getApplicationDocumentsDirectory();
     var filePath = '${directory.path}/$fileName';
     var response = await http.get(url);
@@ -81,7 +81,7 @@ class FireBaseNotificationEvents {
     return filePath;
   }
 
-  void showNotification(Map<String, dynamic> jsonData,String imageURL) async {
+  static void showNotification(Map<String, dynamic> jsonData,String imageURL) async {
     var jsonString = json.encode(jsonData);
     print(jsonString);
 
