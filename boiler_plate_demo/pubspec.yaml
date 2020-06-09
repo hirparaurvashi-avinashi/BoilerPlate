@@ -1,4 +1,4 @@
-name: boilerplateexample
+name: boilerplatedemo
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -23,12 +23,16 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   boilerplate:
     path: ../
+#    git:
+#      url: https://github.com/hirparaurvashi-avinashi/boiler_Plate.git
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

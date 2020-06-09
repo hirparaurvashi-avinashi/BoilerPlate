@@ -29,13 +29,13 @@ class FireBaseNotificationEvents {
     getOnLaunchMessageEvent = getOnLaunchMessageEvents;
   }
 
-  static FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  static FirebaseMessaging firebaseMessaging = FirebaseMessaging();
   static FlutterLocalNotificationsPlugin notifications;
 
   static void iOSPermission() {
-    _firebaseMessaging.requestNotificationPermissions(
+    firebaseMessaging.requestNotificationPermissions(
         IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered
+    firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
     });
@@ -120,11 +120,11 @@ class FireBaseNotificationEvents {
   static void fireBaseCloudMessagingListeners() {
     if (Platform.isIOS) iOSPermission();
 
-    _firebaseMessaging.getToken().then((token) {
+    firebaseMessaging.getToken().then((token) {
       getTokenEvent(token);
     });
 
-    _firebaseMessaging.configure(
+    firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         getOnMessageEvent(message);
       },
