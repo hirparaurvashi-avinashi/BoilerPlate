@@ -49,7 +49,7 @@ class CustomRecommandedAppUpdateAlertBox{
     @required String iosAppId,
     @required Function tapOnLaterUpdate
   }){
-    return  showDialog(
+    return showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {

@@ -71,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   configFileSet(){
     DesignCourseAppTheme(Colors.blueGrey);
     Config("http://api.bmf.avinashi.com/api/v1/directLogin/sendOtp",
+        "http://api.bmf.avinashi.com//api/v1/login",
         "http://api.bmf.avinashi.com/api/v1/verify/otp",
         "http://api.bmf.avinashi.com/api/v1/checkAppVersion",
       "bookmyfarm_app_channel_id",
@@ -148,15 +149,18 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: isLogin ? DAshboardScreen(appVersionMessage: versionMessage,appVersionStatus: appVersionStatus,) : isOtpSend ? OTPScreenPage(
-          verifyOtpCallback: afterLoginWithOTPCompleteCallback,
-          appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
-          mobileNumber: mobilenumber,
-          mobileToken: otpToken,
-        )
-            : LoginPage(appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
-          afterLoginCallback: loginResponse,
-        )
+        body:
+//        isLogin ?
+        DAshboardScreen(appVersionMessage: versionMessage,appVersionStatus: appVersionStatus,)
+//            : isOtpSend ? OTPScreenPage(
+//          verifyOtpCallback: afterLoginWithOTPCompleteCallback,
+//          appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
+//          mobileNumber: mobilenumber,
+//          mobileToken: otpToken,
+//        )
+//            : LoginPage(appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
+//          afterLoginCallback: loginResponse,
+//        )
     );
   }
 }

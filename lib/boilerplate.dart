@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import 'APICalls/ServerCommunicator.dart';
+import 'CommonJsonFiles/CommonStaticJsonFiles.dart';
 import 'CommonToastUI/ToastMessage.dart';
 import 'Constants/Config.dart';
 import 'OTPModule/OtpScreen.dart';
@@ -30,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   var mobileController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var isLoading = false;
+  Map<String,String> selectedcountry;
 
   @override
   void dispose() {
@@ -60,32 +62,79 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+
   Widget mobileNumberField(){
     return Container(
         margin: EdgeInsets.only(left: 16, right: 16,top: 30),
-        child: TextFormField(
-          keyboardType: TextInputType.number,
-          controller: mobileController,
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.stay_current_portrait, size: 18,color: DesignCourseAppTheme.appThemeColor,),
-              focusedBorder:UnderlineInputBorder(
-                borderSide: BorderSide(color: DesignCourseAppTheme.appThemeColor, width: 2.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            CommomJson.countries.length > 1 ? Container(
+              width: 70,
+              margin: EdgeInsets.only(top: 31),
+              child: Container(
+                height: 37,
+                child: DropdownButtonHideUnderline(
+                  child: new DropdownButton(
+                    isDense: true,
+                    isExpanded: true,
+                    style: TextStyle(
+                      height: 0.1,
+                      fontSize: 16.0,
+                      fontFamily: "SourceSansPro",
+                      color: Colors.grey[700],
+                    ),
+                    value: selectedcountry == null ? CommomJson.countries[0]["countryCode"] : selectedcountry["countryCode"],
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          CommomJson.countries.forEach((element) {
+                            if(element["countryCode"] == value){
+                              selectedcountry = element;
+                            }
+                          });
+                        });
+                      }
+                    },
+                    items: CommomJson.countries.map((country) {
+                      return new DropdownMenuItem(
+                        child: Text(country["countryCode"]),
+                        value: country["countryCode"],
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
-              labelText: "Enter mobile number",
-              labelStyle: DesignCourseAppTheme.styleWithTextTheme,
-              focusColor: DesignCourseAppTheme.appThemeColor
-          ),
-          inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-          validator: (value) {
-            if (value.isEmpty) {
-              return "Mobile number can't be blank";
-            } else {
-              if (value.length < 10) {
-                return "Please enter valid mobile number";
-              }
-            }
-            return null;
-          },
+            ) : Container(),
+//            SizedBox(width: CommomJson.countries.length > 1 ? 10 : 0,),
+            Container(
+              width: CommomJson.countries.length > 1 ? MediaQuery.of(context).size.width - 110 : MediaQuery.of(context).size.width - 40,
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                controller: mobileController,
+                decoration: InputDecoration(
+                    prefixIcon:Icon(Icons.stay_current_portrait, size: 18,color: DesignCourseAppTheme.appThemeColor,),
+                    focusedBorder:UnderlineInputBorder(
+                      borderSide: BorderSide(color: DesignCourseAppTheme.appThemeColor, width: 2.0),
+                    ),
+                    labelText: "Enter mobile number",
+                    labelStyle: DesignCourseAppTheme.styleWithTextTheme,
+                    focusColor: DesignCourseAppTheme.appThemeColor
+                ),
+                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Mobile number can't be blank";
+                  } else {
+                    if (value.length < 10) {
+                      return "Please enter valid mobile number";
+                    }
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ],
         )
     );
   }
@@ -145,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 20),
-                          child: Text("Login",style: Theme.of(context).textTheme.headline,),
+                          child: Text("Login",style: Theme.of(context).textTheme.headline5,),
                         ),
 
                         mobileNumberField(),
