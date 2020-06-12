@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
 //            ),
 //            SizedBox(width: CommomJson.countries.length > 1 ? 10 : 0,),
             Container(
-              width: CommomJson.countries.length > 1 ? MediaQuery.of(context).size.width - 110 : MediaQuery.of(context).size.width - 40,
+              width: MediaQuery.of(context).size.width - 110,
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 controller: mobileController,

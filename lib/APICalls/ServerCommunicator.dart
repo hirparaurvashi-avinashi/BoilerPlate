@@ -8,7 +8,7 @@ import 'package:package_info/package_info.dart';
 class APIProvider {
   Dio getDio() {
     Dio dio = new Dio();
-//    /*DISABLE_PROXY_START true
+    /*DISABLE_PROXY_START true
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.findProxy = (uri) {
