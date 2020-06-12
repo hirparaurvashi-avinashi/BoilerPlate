@@ -7,15 +7,16 @@ class Config{
   static String appVersion;
   static String appChannelIDorNotification;
   static String applicationName;
+  static bool dummyData;
 
-
-  Config(String loginurl,String signupurl,String otpurl,String appversion,String appChannelID,String appName){
+  Config(String loginurl,String signupurl,String otpurl,String appversion,String appChannelID,String appName,bool dummyValue){
     loginUrl = loginurl;
     otpUrl = otpurl;
     signupUrl = signupurl;
     appVersion = appversion;
     appChannelIDorNotification = appChannelID;
     applicationName = appName;
+    dummyData = dummyValue;
   }
 
 }

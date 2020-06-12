@@ -75,7 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
         "http://api.bmf.avinashi.com/api/v1/verify/otp",
         "http://api.bmf.avinashi.com/api/v1/checkAppVersion",
       "bookmyfarm_app_channel_id",
-      "BookMyFarm App"
+      "BookMyFarm App",
+      false
     );
     FireBaseNotificationEvents(tapOnNotification,onSelectLocalNotification,getTokenEvent,getOnMessageEvent,getOnResumeMessageEvent,getOnLaunchMessageEvent);
     FireBaseNotificationEvents.intializeLocalNotification();

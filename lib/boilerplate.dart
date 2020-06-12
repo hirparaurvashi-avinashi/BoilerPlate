@@ -155,7 +155,11 @@ class _LoginPageState extends State<LoginPage> {
             child: InkWell(
               // When the user taps the button, show a snackbar.
               onTap: () {
-                onTapButton();
+                if(Config.dummyData){
+                  widget.afterLoginCallback("",mobileController.text);
+                }else{
+                  onTapButton();
+                }
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,

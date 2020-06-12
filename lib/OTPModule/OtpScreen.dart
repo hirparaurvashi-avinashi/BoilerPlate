@@ -179,9 +179,14 @@ class _OTPScreenState extends State<OTPScreenPage> {
         child: InkWell(
           // When the user taps the button, show a snackbar.
           onTap: () {
-            if(!isLoading){
+            if(Config.dummyData){
+              widget.verifyOtpCallback(otpToken,"");
+            }else{
+              if(!isLoading){
 //                          tapOnButton();
+              }
             }
+
           },
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -224,7 +229,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
                       style: DesignCourseAppTheme.body1,
                       children: <TextSpan>[
                         TextSpan(
-                          text: widget.mobileNumber,
+                          text: widget.mobileNumber ?? "",
                           style: DesignCourseAppTheme.styleWithTextTheme,
                         ),
                       ],
