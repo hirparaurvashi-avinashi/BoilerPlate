@@ -150,17 +150,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body:
-//        isLogin ?
+        isLogin ?
         DAshboardScreen(appVersionMessage: versionMessage,appVersionStatus: appVersionStatus,)
-//            : isOtpSend ? OTPScreenPage(
-//          verifyOtpCallback: afterLoginWithOTPCompleteCallback,
-//          appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
-//          mobileNumber: mobilenumber,
-//          mobileToken: otpToken,
-//        )
-//            : LoginPage(appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
-//          afterLoginCallback: loginResponse,
-//        )
+            : isOtpSend ? OTPScreenPage(
+          verifyOtpCallback: afterLoginWithOTPCompleteCallback,
+          appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
+          mobileNumber: mobilenumber,
+          mobileToken: otpToken,
+        )
+            : LoginPage(appIcon: Image(image: AssetImage('assets/logo.png'),height: 150.0),
+          afterLoginCallback: loginResponse,
+        )
     );
   }
 }
