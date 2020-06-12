@@ -69,12 +69,12 @@ class _LoginPageState extends State<LoginPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            CommomJson.countries.length > 1 ? Container(
+             Container(
               width: 70,
               margin: EdgeInsets.only(top: 31),
               child: Container(
                 height: 37,
-                child: DropdownButtonHideUnderline(
+                child: CommomJson.countries.length > 1 ? DropdownButtonHideUnderline(
                   child: new DropdownButton(
                     isDense: true,
                     isExpanded: true,
@@ -103,9 +103,15 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     }).toList(),
                   ),
-                ),
+                ) : Text(
+                      CommomJson.countries[0]["countryCode"],
+                    style: Theme.of(context).textTheme.headline5,
+                    ),
               ),
-            ) : Container(),
+            ) ,
+//            Text(
+//              CommomJson.countries[0]["countryCode"]
+//            ),
 //            SizedBox(width: CommomJson.countries.length > 1 ? 10 : 0,),
             Container(
               width: CommomJson.countries.length > 1 ? MediaQuery.of(context).size.width - 110 : MediaQuery.of(context).size.width - 40,
