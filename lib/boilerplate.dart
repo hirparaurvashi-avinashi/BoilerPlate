@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
             isLoading = false;
           });
 
-          widget.afterLoginCallback(onValue["data"] as String,mobileController.text);
+          widget.afterLoginCallback(onValue["data"],mobileController.text);
         } else {
           setState(() {
             isLoading = false;
