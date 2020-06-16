@@ -37,7 +37,16 @@ class APIProvider {
   Future<Map<String, dynamic>> verifyOTP(String otpHash, int otp) async {
     Response response = await getDio().post(Config.otpUrl, data: {
       "otp": otp,
-      "mobileToken": otpHash,
+      "id": otpHash,
+      "deviceType": "Mobile",
+      "fcmToken": "",
+      "deviceInfo": [{
+        "deviceId": "",
+        "phoneModel": "",
+        "operatingSystem": "",
+        "applicationClient": "",
+        "applicationVersion": ""
+      }]
     });
     return response.data;
   }
