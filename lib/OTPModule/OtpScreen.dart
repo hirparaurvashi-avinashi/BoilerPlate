@@ -87,7 +87,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
             isLoading = false;
           });
           setState(() {
-            otpToken = onValue['data'] as String;
+            otpToken = onValue['data']["id"];
           });
         } else {
           setState(() {
@@ -132,7 +132,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       if (onValue['flag']) {
         setState(() {
           isResend = false;
-          otpToken = onValue['data'] as String;
+          otpToken = onValue['data']["id"];
         });
       } else {
         setState(() {
