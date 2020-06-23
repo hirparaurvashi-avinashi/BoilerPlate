@@ -197,7 +197,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
               color: DesignCourseAppTheme.white,
               size: 24.0,
             )
-                : Text("VerifyOTP",
+                : Text("Verify OTP",
               style: DesignCourseAppTheme.tansprentFontColor,
               textAlign: TextAlign.center,
             ),
