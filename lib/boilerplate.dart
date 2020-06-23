@@ -147,6 +147,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget loginButtonUI(){
     return Container(
+      height: 60,
         margin: EdgeInsets.only(left: 16, right: 16, top: 30),
         child: Container(
           child: Material(
