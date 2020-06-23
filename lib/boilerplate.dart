@@ -150,6 +150,7 @@ class _LoginPageState extends State<LoginPage> {
       height: 60,
         margin: EdgeInsets.only(left: 16, right: 16, top: 30),
         child: Container(
+          height: 60,
           child: Material(
             borderRadius: BorderRadius.circular(5),
             color: DesignCourseAppTheme.appThemeColor,
@@ -169,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                 isLoading
                     ? SpinKitThreeBounce(
                   color: DesignCourseAppTheme.white,
-                  size: 30.0,
+                  size: 24.0,
                 )
                     :
                 Text("Login",

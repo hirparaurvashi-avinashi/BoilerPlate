@@ -173,6 +173,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
 
   Widget verifiOTPButton(){
     return Container(
+      height: 60,
       child: Material(
         borderRadius: BorderRadius.circular(5),
         color: DesignCourseAppTheme.appThemeColor,
@@ -194,7 +195,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
             child: isLoading
                 ? SpinKitThreeBounce(
               color: DesignCourseAppTheme.white,
-              size: 30.0,
+              size: 24.0,
             )
                 : Text("VerifyOTP",
               style: DesignCourseAppTheme.tansprentFontColor,
