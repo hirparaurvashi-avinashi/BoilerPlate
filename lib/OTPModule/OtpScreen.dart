@@ -173,7 +173,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
 
   Widget verifiOTPButton(){
     return Container(
-      height: 60,
+      height: 50,
       child: Material(
         borderRadius: BorderRadius.circular(5),
         color: DesignCourseAppTheme.appThemeColor,

@@ -147,10 +147,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget loginButtonUI(){
     return Container(
-      height: 60,
+      height: 50,
         margin: EdgeInsets.only(left: 16, right: 16, top: 30),
         child: Container(
-          height: 60,
+          height: 50,
           child: Material(
             borderRadius: BorderRadius.circular(5),
             color: DesignCourseAppTheme.appThemeColor,
