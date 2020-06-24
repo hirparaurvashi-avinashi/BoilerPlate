@@ -1,10 +1,6 @@
-import 'package:boilerplatedemo/GraphQlProvider.dart';
 import 'package:boilerplatedemo/UUIDGEnerator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:graphql_flutter/graphql_flutter.dart';
-
 import 'package:boilerplate/GPS/GPSReading.dart';
 import 'package:boilerplate/CommonToastUI/ToastMessage.dart';
 import 'package:boilerplate/CalenderProvider/CalenderRepsonseEvents.dart';
