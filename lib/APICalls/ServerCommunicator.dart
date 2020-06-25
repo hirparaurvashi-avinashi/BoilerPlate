@@ -21,9 +21,14 @@ class APIProvider {
     return dio;
   }
 
-  Future<Map<String, dynamic>> doLogin(String mobile) async {
+  Future<Map<String, dynamic>> doLogin(String mobile,String scope) async {
+
+    var mobilejson = {"mobile": mobile};
+    var mobileWithScopeJson = {"mobile": mobile, "role": scope};
+
     Response response = await getDio().post(Config.loginUrl,
-        data: {"mobile": mobile});
+        data: scope == "" ? mobilejson : mobileWithScopeJson
+        );
 //    final userResponse = LoginResponse.fromJson(response.data);
     return response.data;
   }

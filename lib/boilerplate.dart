@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isLoading = true;
       });
-      APIProvider().doLogin(mobileController.text)
+      APIProvider().doLogin(mobileController.text,Config.isScope == "" ? "" : Config.isScope)
           .then((onValue) {
         if (onValue['flag']) {
           setState(() {

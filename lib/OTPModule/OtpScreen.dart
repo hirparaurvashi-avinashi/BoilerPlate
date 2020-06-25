@@ -80,7 +80,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       setState(() {
         isLoading = true;
       });
-      APIProvider().doLogin(widget.mobileNumber).then((
+      APIProvider().doLogin(widget.mobileNumber,Config.isScope == "" ? "" : Config.isScope).then((
           onValue) {
         if (onValue['flag']) {
           setState(() {
@@ -127,7 +127,7 @@ class _OTPScreenState extends State<OTPScreenPage> {
       otpCode = "";
       setResendAfterTime();
     });
-    APIProvider().doLogin(widget.mobileNumber)
+    APIProvider().doLogin(widget.mobileNumber,Config.isScope == "" ? "" : Config.isScope)
         .then((onValue) {
       if (onValue['flag']) {
         setState(() {
