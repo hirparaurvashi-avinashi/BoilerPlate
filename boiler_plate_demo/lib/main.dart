@@ -4,10 +4,14 @@ import 'package:boilerplate/boilerplate.dart';
 import 'package:boilerplate/APICalls/ServerCommunicator.dart';
 import 'package:boilerplate/OTPModule/OtpScreen.dart';
 import 'package:boilerplate/Theme/AppTheme.dart';
+import 'package:boilerplate/LogManager/LogManagement.dart';
 import 'package:boilerplate/Constants/Config.dart';
 import 'package:boilerplate/Notification/FireBaseNotifications.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+  LogManagement.initializeLogger("http://requestbin.avinashi.com/1h5wejl1");
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
