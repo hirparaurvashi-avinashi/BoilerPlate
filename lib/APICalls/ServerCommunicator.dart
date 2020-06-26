@@ -8,15 +8,15 @@ import 'package:package_info/package_info.dart';
 class APIProvider {
   Dio getDio() {
     Dio dio = new Dio();
-    /*DISABLE_PROXY_START true
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
-      client.findProxy = (uri) {
-        return "PROXY 192.168.11.78:8888";
-      };
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
+//    /*DISABLE_PROXY_START true
+//    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+//        (HttpClient client) {
+//      client.findProxy = (uri) {
+//        return "PROXY 192.168.11.78:8888";
+//      };
+//      client.badCertificateCallback =
+//          (X509Certificate cert, String host, int port) => true;
+//    };
 // DISABLE_PROXY_END true*/
     return dio;
   }
